@@ -18,21 +18,23 @@ public class NIF {
     private char letra;
 
     public NIF() {
+        this.DNI = "0";
+        this.letra = 'o';
     }
 
     public NIF(String DNI) {
         this.DNI = DNI;
-        
-        int numeros= Integer.parseInt(DNI);
-        
-        int resto = numeros%23;
-        
-        switch(resto){
-            case 0:
-                this.letra=84;
-                break;
-        }
+        this.letra = calcularLetra(DNI);
 
+    }
+
+    private static char calcularLetra(String DNI) {
+        //String = array de char
+        String caracteres = "TRWAGMYFPDXBNJZSQVHLCKE";
+        //resto = el resto de el numero que se le pasa lo casteo a int lo divido entre 23
+        int resto = Integer.parseInt(DNI) % 23;
+        //Devuelvo los caracteres de la posición que sea el resto
+        return caracteres.charAt(resto);
     }
 
     public String getDNI() {
@@ -43,19 +45,24 @@ public class NIF {
         return letra;
     }
 
+    // Estático porque es de clase (no referencia ningún this)
     public static String leer() {
 
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Introduce el número de DNI");
-        String numeroDni = teclado.next();
 
-        return numeroDni;
+        return teclado.nextLine();
     }
 
     @Override
     public String toString() {
-        return "NIF{" + "DNI=" + DNI + ", letra=" + letra + '}';
+        return DNI + "-" + letra;
+    }
+
+    public void mostrar() {
+        System.out.println(toString());
+
     }
 
 }

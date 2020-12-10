@@ -12,12 +12,7 @@ package dni;
 public class PruebaNIF {
     public static void main(String[] args) {
         
-        NIF persona1 = new NIF();
-        
-        System.out.println(persona1);
-        
-       NIF persona2 = new NIF("23");
-       
-        System.out.println(persona2);
+        NIF persona1 = new NIF(NIF.leer());
+        persona1.mostrar();
     }
 }
